@@ -27,29 +27,25 @@ def customized_Hawkes(data,mask,decay,rho, itermax,term_cond = 1,train_split = 0
     true_b = data.get('b')
     true_p = data.get('p')
     true_c = data.get('c')
-    # initialize with mean values
-    b0 = np.ones((M,N))*0.8
-    v0 = np.ones((M,N))* 20
-    c0 = np.ones((M,N))*1.8
-    p0 = np.ones((M,N))* 8
+    # initializations
+    b0 = np.ones((M,N))
+    v0 = np.ones((M,N))
+    c0 = np.ones((M,N))
+    p0 = np.ones((M,N))
 
     vz,vz_old = v0, v0
     bz, bz_old = b0, b0
     pz, pz_old = p0, p0
     cz, cz_old = c0, c0
 
-    # A0 = abs(np.random.normal(loc = 0.8,scale = 0,size = (M,N)))  # alpha in self-excitement
-    # M0 = np.random.normal(loc = 85,scale = 0,size = (M,N))
-    M0 = np.ones((M,N))*85
-    A0 = np.ones((M,N))*0.8
-    Gamma_d0 = np.ones((M,N))*20
-    Gamma_o0 = np.ones((M,N))*10
+
+    M0 = np.ones((M,N))
+    A0 = np.ones((M,N))
+    Gamma_d0 = np.ones((M,N))
+    Gamma_o0 = np.ones((M,N))
     Gamma_h0 = np.ones((M,N))
 
-    # Gamma_d0 = abs(np.random.normal(loc = 20,scale = 0,size = (M,N)))
-    # Gamma_o0 = abs(np.random.normal(loc = 10,scale = 0,size = (M,N)))
-    # Gamma_h0 = abs(np.random.normal(loc = 1,scale = 0,size = (M,N)))
-    # #
+
     Az, Az_old = A0, A0
     Mz, Mz_old = M0, M0
     Gamma_dz, Gamma_dz_old = Gamma_d0, Gamma_d0
