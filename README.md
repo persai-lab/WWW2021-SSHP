@@ -13,7 +13,7 @@ Code accomanying the paper: M. Yao, S. Zhao, S. Sahebi, and R. Feyzi Behnagh, â€
 * scipy
 * sklearn
 
-## Collarators:
+## Collaborators:
 * Miley Yao: myao@albany.edu
 * Sherry Sahebi: ssahebi@albany.edu
 * Reza Feyzi Behnagh: rfeyzibehnagh@albany.edu
