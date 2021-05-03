@@ -211,14 +211,3 @@ def compute_grads(x,mask,alpha,beta,v,m,b,s,p,c,gammad, gammao, gammat,out_grad=
     Dgammah = np.array(Dgammah).reshape(M, N)
     Fs = np.array(Fs).reshape(M,N)
     return Dalpha,Dm,Dv,Db,Dp,Dc,Dgammad,Dgammao, Dgammah, Fs/np.sum(mask), np.sum(Fs)/np.sum(mask)
-
-# x = np.array([np.array([range(2, 10), range(3, 11), range(4, 12)])] * 5)
-# # x = np.array([0.1,0.15,0.4,0.8,1.4,2.0,2.6,9.7])
-# mask = np.ones((x.shape[0],x.shape[1]))
-# s, m, v, b, p, c, gammad, gammao, gammat = 2, 15*np.ones_like(mask), np.ones_like(mask), 0.5*np.ones_like(mask),\
-#                                            10*np.ones_like(mask), np.ones_like(mask), np.ones_like(mask), \
-#                                            np.ones_like(mask), np.ones_like(mask)
-# alpha, beta = 0.6*np.ones_like(mask), 0.5
-# Dalpha,Dm,Dv,Db,Dp,Dc,Dgammad,Dgammao, Dgammah, Fs_m,Fs = \
-#     compute_grads(x,mask,alpha,beta,v,m,b,s,p,c,gammad, gammao, gammat,out_grad=True)
-# print(Dalpha)

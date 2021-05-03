@@ -17,52 +17,6 @@ def _my_svd(M, k, method):
         raise ValueError("wrong algorithm")
     return U, S, V
 
-# def trace_proj(
-#         A,
-#         mask, # 0 = missing, 1 = observed
-#         tau=None,
-#         delta=None,
-#         epsilon=1e-5,
-#         max_iterations=500,
-#         algorithm='arpack'):
-#
-#     if algorithm not in ['randomized', 'arpack']:
-#         raise ValueError("unknown algorithm %r" % algorithm)
-#     Y = np.zeros_like(A)
-#
-#     if not tau:
-#         tau = 5 * np.sum(A.shape) / 2
-#     if not delta:
-#         delta = 1.2 * np.prod(A.shape) / np.sum(mask)
-#
-#     r_previous = 0
-#
-#     for k in range(max_iterations):
-#         # print(k,A)
-#         if k == 0:
-#             X = np.zeros_like(A)
-#         else:
-#             sk = r_previous + 1
-#             (U, S, V) = _my_svd(Y, sk, algorithm)
-#             # print(S)
-#             # while np.min(S) >= tau:
-#             #     sk = sk + 5
-#             #     (U, S, V) = _my_svd(Y, sk, algorithm)
-#             shrink_S = np.maximum(S - tau, 0)
-#             r_previous = np.count_nonzero(shrink_S)
-#             diag_shrink_S = np.diag(shrink_S)
-#             X = np.linalg.multi_dot([U, diag_shrink_S, V])
-#         Y += delta * mask * (A - X)
-#
-#         recon_error = np.linalg.norm(mask * (X - A)) / np.linalg.norm(mask * A)
-#
-#         if recon_error < epsilon:
-#             break
-#     print(np.linalg.norm(mask * (X - A)) ** 2 / 200)
-#     Z_tn = np.sum(np.diag(S))
-#     # print('error')
-#     # print(recon_error)
-#     return X,Z_tn
 
 
 def trace_proj(X,k,alpha,mask):
