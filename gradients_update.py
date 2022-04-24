@@ -140,18 +140,37 @@ def compute_grads(x,mask,alpha,beta,v,m,b,s,p,c,gammad, gammao, gammat,out_grad=
 
 
 
-    M, N= x.shape
+    M, N, K= x.shape
     # xK = np.array([[inner[-1] for inner in x0] for x0 in x])
     Dalpha,Dm,Dv,Db,Dp,Dc,Dgammad,Dgammao, Dgammah = [],[],[],[],[],[],[],[],[]
     Fs = []
+
+    #print('initial m', m)
     for i in range(M):
+        #print('i',i)
         for j in range(N):
-            # print(i,j)
+            #print(i,j)
             if mask[i,j]==1:
-                xi,mi,vi,bi,pi,ci,alphai  = x[i,j],m[i,j],v[i,j],b[i,j],p[i,j],c[i,j],alpha[i,j]
-                xKi = xi[0][-1]
+                #print('xij',x[i,j] )
+                #print('m',m)
+                #xi,mi,vi,bi,pi,ci,alphai  = x[i,j],m[i,j],v[i,j],b[i,j],p[i,j],c[i,j],alpha[i,j]
+
+
+                xi = x[i,j]
+                mi = m[i, j]
+                vi = v[i, j]
+                bi =   b[i, j]
+                pi =   p[i, j]
+                ci = c[i, j]
+                alphai = alpha[i, j]
+
+                #xKi = xi[0][-1]
+                xKi = xi[0]
                 gammadi,gammaoi,gammati = gammad[i,j],gammao[i,j],gammat[i,j]
                 R_value = R_function(xi)
+
+                #R_value = R_function(x)
+
                 mud = mu_d(xi,vi,mi,s)
                 muo = mu_o(xi,bi,s)
                 mut = mu_t(xi,s,pi,ci)
