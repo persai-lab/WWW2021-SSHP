@@ -22,7 +22,10 @@ This matfile contians the following subfields:
 * mask: a 2d array of the size of num_student x num_assignment, with 1 and 0 respectively representing the corresponding user,assignment pair is available or not. 
 
 ## Run SSHP
-run runner.py
+run SSHP using the following command:
+python3 runner.py.
+One can change hyperparamter decay by setting it to different values, e.g. 10.
+The estimated parameters will be saved as a matfile under root called "est_decay_{decay value}".
 
 
 ## Collaborators:
