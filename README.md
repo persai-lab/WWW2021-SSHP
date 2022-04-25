@@ -14,7 +14,7 @@ Code accomanying the paper: M. Yao, S. Zhao, S. Sahebi, and R. Feyzi Behnagh, â€
 * scipy
 * sklearn
 
-## data format
+## Input format
 Input data needs to be saved as a matfile under root as ''data.mat''.
 This matfile contians the following subfields:
 * X_train: training data that is an 2d array of the size of num_student x num_assignment, within which, each cell is an 1xK array of sorted ascending timestamps (e.g. cell in i-th column and j-th row is array([[2.446, 4.346,...,100.598]]).
