@@ -1,3 +1,4 @@
+from generate_synthetic_data import generate_synthetic_data
 from gradients_update import *
 from trace_projection import *
 from scipy.io import loadmat
@@ -23,7 +24,10 @@ def gen_mask(m, n, prob_masked=0.5):
 
 
 def customized_Hawkes(data, mask, decay, rho, itermax, term_cond=1, train_split=0.7):
-    x = np.array([np.array([range(2, 10), range(3, 11), range(4, 12)])] * 5)  # M x N x K, N = 3, M = 5, K = 8
+    x = np.array([np.array(
+        [range(2, 10), range(5, 13), range(4, 12), range(4, 12), range(4, 12)])] * 10)  # M x N x K, N = 3, M = 5, K = 8
+
+    print('shape', x.shape)
     true_A = data.get('A')
     true_M = data.get('M')
     true_Gamma_d = data.get('Gamma_d')
@@ -59,7 +63,6 @@ def customized_Hawkes(data, mask, decay, rho, itermax, term_cond=1, train_split=
 
     funcVal = [compute_grads(x, mask, A0, decay, v0, M0, b0, 1, p0, c0, Gamma_d0,
                              Gamma_o0, Gamma_h0, out_grad=True)[-1]]
-
 
     true_loss = [compute_grads(x, mask, true_A, decay, true_v, true_M, true_b, 1, true_p, true_c, true_Gamma_d,
                                true_Gamma_o, true_Gamma_h, out_grad=True)[-1]]
@@ -306,55 +309,15 @@ def customized_Hawkes(data, mask, decay, rho, itermax, term_cond=1, train_split=
     return est, funcVal
 
 
-# data = {'M': np.array([np.array([range(2, 10), range(3, 11), range(4, 12)])] * 5), 'A': 5}
-# # x = np.array([np.array([range(2, 10), range(3, 11), range(4, 12)])] * 5)  # M x N x K, N = 3, M = 5, K = 8
-# # x = data.get('X_train')
-# # # train_x =
-# true_A = data.get('A')
-# true_M = data.get('M')
-#
-# print(true_M, true_M.shape)
-# print(true_A)
-
-
-def generate_synthetic_data():
-    mu_a, sigma_a = 0.4, 0.1
-    mu_m, sigma_m = 0, 5
-    mu_gammad, sigma_gammad = 15, 3
-    mu_gammao, sigma_gammao = 5, 3
-    mu_gammah, sigma_gammah = 0.5, 0.1
-    mu_v, sigma_v = 20, 10
-    mu_b, sigma_b = 0.5, 0.3
-    mu_p, sigma_p = 6, 4
-    mu_c, sigma_c = 1.2, 0.1
-
-    A = np.random.normal(mu_a, sigma_a, (5,3))
-    M = np.random.normal(mu_m, sigma_m, (5,3))
-    Gamma_d = np.random.normal(mu_gammad, sigma_gammad, (5,3))
-    Gamma_o = np.random.normal(mu_gammao, sigma_gammao, (5,3))
-    Gamma_h = np.random.normal(mu_gammah, sigma_gammah, (5,3))
-    v = np.random.normal(mu_v, sigma_v, (5,3))
-    b = np.random.normal(mu_b, sigma_b, (5,3))
-    p = np.random.normal(mu_p, sigma_p, (5,3))
-    c = np.random.normal(mu_c, sigma_c, (5,3))
-
-    data = {'A': A, 'M': M, 'Gamma_d': Gamma_d, 'Gamma_o': Gamma_o, 'Gamma_h': Gamma_h, 'v': v,
-            'b': b, 'p': p, 'c': c}
-
-    return data
-
-
 if __name__ == '__main__':
     data = generate_synthetic_data()
-    m, n = 5, 3
+    m, n = 10, 5
 
-    mask = gen_mask(m,n)
+    mask = gen_mask(m, n)
     decay = 1.0
     rho = 0.01
     itermax = 10000
 
     est, funcVal = customized_Hawkes(data, mask, decay, rho, itermax, term_cond=1, train_split=0.7)
 
-    print('est',est)
-
-
+    print('est', est)
