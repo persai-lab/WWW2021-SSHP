@@ -140,7 +140,7 @@ def compute_grads(x,mask,alpha,beta,v,m,b,s,p,c,gammad, gammao, gammat,out_grad=
 
 
 
-    M, N= x.shape
+    M, N, K= x.shape
     # xK = np.array([[inner[-1] for inner in x0] for x0 in x])
     Dalpha,Dm,Dv,Db,Dp,Dc,Dgammad,Dgammao, Dgammah = [],[],[],[],[],[],[],[],[]
     Fs = []
@@ -149,7 +149,8 @@ def compute_grads(x,mask,alpha,beta,v,m,b,s,p,c,gammad, gammao, gammat,out_grad=
             # print(i,j)
             if mask[i,j]==1:
                 xi,mi,vi,bi,pi,ci,alphai  = x[i,j],m[i,j],v[i,j],b[i,j],p[i,j],c[i,j],alpha[i,j]
-                xKi = xi[0][-1]
+                #xKi = xi[0][-1]
+                xKi = xi[0]
                 gammadi,gammaoi,gammati = gammad[i,j],gammao[i,j],gammat[i,j]
                 R_value = R_function(xi)
                 mud = mu_d(xi,vi,mi,s)
