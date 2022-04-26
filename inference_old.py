@@ -1,5 +1,5 @@
 from generate_synthetic_data import generate_synthetic_data
-from gradients_update import *
+from gradients_update_old import *
 from trace_projection import *
 from scipy.io import loadmat
 import warnings
