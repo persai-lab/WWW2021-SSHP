@@ -6,7 +6,7 @@ X = data.get('X_train')
 mask = data.get('mask')
 
 # params initializations
-M,N = X.shape
+M,N, K = X.shape
 M0 = []
 for i in range(M):
     for j in range(N):
@@ -15,6 +15,8 @@ for i in range(M):
         except:
             M0.append(1200)
 M0 = np.array(M0).reshape(M,N)
+
+print('M0', M0)
 init = {}
 init['A0'] = abs(np.random.normal(loc = 1,scale = 0.1,size = (M,N)))
 init['M0'] = M0
@@ -29,4 +31,3 @@ init['Gamma_h0'] = np.ones((M,N))*10
 decay = 10 #hyperparameter
 est,funcVal = customized_Hawkes(data, init, mask, decay, 0.5, 25, term_cond =1)
 scipy.io.savemat(f'est_decay_{decay}', mdict=est) # save estimated params
-est
