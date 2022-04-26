@@ -10,7 +10,7 @@ def gen_mask(m, n, prob_masked=0.5):
 
 def customized_Hawkes(data,init,mask,decay,rho, itermax,term_cond = 1,train_split = 0.7):
     x = data.get('X_train')
-    M, N = x.shape
+    M, N , K = x.shape
     b0 = init['b0']
     v0 = init['v0']
     c0 = init['c0']
